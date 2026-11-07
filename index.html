@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Make My World Magical ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--cream:#f8f1df;
+--darkgreen:#183e30;
+--green:#315b43;
+--gold:#c9a86a;
+}
+
+body{
+background:var(--cream);
+color:var(--darkgreen);
+font-family:Poppins,sans-serif;
+overflow-x:hidden;
+}
+
+.stars{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:0;
+}
+
+.star{
+position:absolute;
+color:#c5a66d;
+animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:.2;transform:scale(.7)}
+to{opacity:1;transform:scale(1.2)}
+}
+
+.page{
+display:none;
+position:relative;
+z-index:1;
+min-height:100vh;
+padding:35px 18px 100px;
+text-align:center;
+}
+
+.page.active{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+animation:appear .7s ease;
+}
+
+@keyframes appear{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.small-title{
+font-size:11px;
+letter-spacing:4px;
+color:#987b4d;
+margin-bottom:18px;
+}
+
+h1,h2{
+font-family:'Cormorant Garamond',serif;
+font-weight:500;
+}
+
+h1{
+font-size:clamp(42px,9vw,68px);
+line-height:1.05;
+}
+
+h2{
+font-size:clamp(32px,7vw,45px);
+margin-bottom:15px;
+}
+
+.subtitle{
+max-width:430px;
+line-height:1.8;
+font-size:14px;
+color:#65766a;
+margin:15px auto 25px;
+}
+
+button{
+font-family:Poppins,sans-serif;
+cursor:pointer;
+}
+
+.next{
+background:var(--darkgreen);
+color:var(--cream);
+padding:13px 28px;
+border-radius:30px;
+margin-top:25px;
+letter-spacing:1px;
+border:0;
+box-shadow:0 5px 15px #183e3025;
+transition:.3s;
+}
+
+.next:hover{
+transform:translateY(-3px);
+background:#315b43;
+}
+
+/* MAGIC DOOR */
+
+.door{
+width:210px;
+height:310px;
+background:linear-gradient(90deg,#65452f,#926b49,#65452f);
+border:8px solid #d2b47d;
+border-radius:8px 8px 0 0;
+margin:30px auto;
+box-shadow:0 12px 35px #3b281e55;
+position:relative;
+cursor:pointer;
+transition:1s;
+}
+
+.door::before{
+content:"✦";
+position:absolute;
+top:25px;
+left:50%;
+transform:translateX(-50%);
+color:#f4d99b;
+font-size:35px;
+}
+
+.door::after{
+content:"✧";
+position:absolute;
+top:90px;
+left:50%;
+transform:translateX(-50%);
+color:#f4d99b;
+font-size:50px;
+}
+
+.knob{
+position:absolute;
+right:17px;
+top:155px;
+width:13px;
+height:13px;
+background:#e6c77f;
+border-radius:50%;
+}
+
+.door.open{
+transform:perspective(600px) rotateY(-65deg);
+transform-origin:left;
+}
+
+/* CARDS */
+
+.card{
+background:#fffaf0;
+border:1px solid #e4d5b6;
+border-radius:18px;
+padding:25px;
+max-width:460px;
+width:100%;
+box-shadow:0 10px 30px #49351b12;
+margin:12px auto;
+}
+
+.letter{
+font-family:'Cormorant Garamond',serif;
+font-size:23px;
+line-height:1.8;
+color:#435c49;
+text-align:left;
+}
+
+/* GIFTS */
+
+.gift-grid{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:22px;
+width:100%;
+max-width:400px;
+margin:25px auto;
+}
+
+.giftbox{
+width:100%;
+min-height:190px;
+background:#fffaf0;
+border:2px solid #d9c69f;
+border-radius:22px;
+color:#183e30;
+padding:18px;
+box-shadow:0 9px 25px #183e3020;
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.giftbox:hover{
+transform:translateY(-6px) rotate(-1deg);
+}
+
+.balloons{
+display:block;
+font-size:35px;
+animation:float 2s infinite;
+}
+
+.box-icon{
+display:block;
+font-size:70px;
+margin:8px;
+}
+
+.giftbox small{
+letter-spacing:3px;
+font-size:11px;
+color:#987b4d;
+}
+
+.giftbox.opened{
+background:#e9eddf;
+}
+
+.reveal{
+display:none;
+background:#e9eddf;
+padding:25px;
+border-radius:20px;
+max-width:380px;
+width:100%;
+margin:15px auto;
+border:1px solid #d6c8a8;
+}
+
+.reveal.show{
+display:block;
+animation:appear .5s ease;
+}
+
+.reveal .food{
+font-size:85px;
+margin:10px;
+}
+
+/* INTERACTIVE NOTES */
+
+.bubble{
+display:inline-block;
+background:#e8e9d9;
+border-radius:50px;
+padding:15px;
+margin:8px;
+cursor:pointer;
+font-size:35px;
+transition:.3s;
+}
+
+.bubble:hover{
+background:#d6dfce;
+transform:scale(1.12);
+}
+
+.note{
+display:none;
+margin:18px auto;
+max-width:380px;
+background:#fffaf0;
+border:1px solid #dfcfac;
+border-radius:15px;
+padding:22px;
+font-family:'Cormorant Garamond',serif;
+font-size:23px;
+line-height:1.6;
+}
+
+.note.show{
+display:block;
+animation:appear .5s ease;
+}
+
+.promise{
+display:inline-block;
+padding:15px;
+margin:7px;
+border-radius:12px;
+background:#e9eddf;
+color:#315b43;
+cursor:pointer;
+font-size:14px;
+transition:.3s;
+}
+
+.promise.done{
+background:#315b43;
+color:white;
+}
+
+.big-emoji{
+font-size:70px;
+margin:15px;
+}
+
+.moon{
+font-size:85px;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-13px)}
+}
+
+/* SIGNATURE */
+
+.signature-box{
+background:white;
+border:2px dashed #bda77b;
+border-radius:15px;
+max-width:430px;
+width:100%;
+padding:10px;
+margin:20px auto;
+}
+
+canvas{
+width:100%;
+height:180px;
+display:block;
+touch-action:none;
+cursor:crosshair;
+background:#fffdf8;
+border-radius:8px;
+}
+
+.clear{
+background:#eee5d2;
+color:#654d31;
+padding:9px 18px;
+border-radius:20px;
+margin-top:8px;
+border:0;
+}
+
+.progress{
+position:fixed;
+z-index:5;
+bottom:0;
+left:0;
+height:4px;
+background:var(--gold);
+transition:width .4s;
+}
+
+.page-number{
+position:fixed;
+bottom:14px;
+right:18px;
+color:#8b795a;
+font-size:11px;
+z-index:5;
+}
+
+.floating{
+position:fixed;
+pointer-events:none;
+animation:rise 5s linear forwards;
+z-index:10;
+}
+
+@keyframes rise{
+from{transform:translateY(0) rotate(0);opacity:1}
+to{transform:translateY(-100vh) rotate(40deg);opacity:0}
+}
+
+@media(max-width:400px){
+.door{width:185px;height:275px}
+.card{padding:20px}
+.letter{font-size:21px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="progress" id="progress"></div>
+<div class="page-number" id="pageNumber">01 / 10</div>
+
+<!-- PAGE 1 -->
+<section class="page active" id="p1">
+<div class="small-title">EK CHHOTI SI JAADUI DUNIYA</div>
+
+<h1>
+You Make<br>
+My World<br>
+<i>Magical.</i>
+</h1>
+
+<p class="subtitle">
+Ek chhoti si duniya... sirf tumhare liye banayi hai. ♡
+</p>
+
+<div class="door" id="door" onclick="openDoor()">
+<div class="knob"></div>
+</div>
+
+<p style="font-size:12px;color:#987b4d;letter-spacing:2px">
+✧ DARWAAZA KHOLNE KE LIYE TAP KARO ✧
+</p>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="p2">
+<div class="small-title">PEHLA KISSA</div>
+<h2>Thodi si jaadui baat ✨</h2>
+
+<div class="moon">🌙</div>
+
+<div class="card">
+<p class="letter">
+Pata hai, duniya mein kuch log aise hote hain
+jinke hone se hi sab kuch thoda achha lagne lagta hai.
+
+<br><br>
+
+Unki ek chhoti si baat, ek hasi,
+ya bas unka saamne hona bhi
+kisi ka din bana sakta hai.
+
+<br><br>
+
+Aur tum unhi khaas logon mein se ek ho.
+
+<br><br>
+
+Shayad tumhe iska andaaza bhi na ho,
+par tumhari apni ek alag si jagah hai. ♡
+</p>
+</div>
+
+<button class="next" onclick="go(3)">AAGE CHALO →</button>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="p3">
+<div class="small-title">CHHOTE CHHOTE PAL</div>
+<h2>Kuch pyaari si baatein 🌷</h2>
+
+<p class="subtitle">Phoolon par tap karo, ek baat suno.</p>
+
+<div>
+<span class="bubble" onclick="showNote(0)">🌷</span>
+<span class="bubble" onclick="showNote(1)">🌻</span>
+<span class="bubble" onclick="showNote(2)">🦋</span>
+<span class="bubble" onclick="showNote(3)">✨</span>
+</div>
+
+<div class="note" id="momentNote"></div>
+
+<button class="next" onclick="go(4)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page" id="p4">
+<div class="small-title">TUMHARE LIYE CHHOTE SURPRISES</div>
+<h2>Gift kholo na! 🎁</h2>
+
+<p class="subtitle">
+Har dabbe mein kuch chhupa hai...
+Dekhte hain tumhe kya milta hai!
+</p>
+
+<div class="gift-grid">
+
+<button class="giftbox" onclick="gift(0,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>PEHLA GIFT</small>
+</button>
+
+<button class="giftbox" onclick="gift(1,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>DOOSRA GIFT</small>
+</button>
+
+<button class="giftbox" onclick="gift(2,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>TEESRA GIFT</small>
+</button>
+
+<button class="giftbox" onclick="gift(3,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>CHAUTHA GIFT</small>
+</button>
+
+<button class="giftbox" onclick="gift(4,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>PAANCHWA GIFT</small>
+</button>
+
+<button class="giftbox" onclick="gift(5,this)">
+<span class="balloons">🎈🎈🎈</span>
+<span class="box-icon">🎁</span>
+<small>CHHATHA GIFT</small>
+</button>
+
+</div>
+
+<div class="reveal" id="giftReveal"></div>
+
+<button class="next" onclick="go(5)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page" id="p5">
+<div class="small-title">CHHUPI HUI BAATEIN</div>
+<h2>Ek raaz ki chitthi 💌</h2>
+
+<p class="subtitle">Kisi bhi lifaafe ko kholo...</p>
+
+<div>
+<span class="bubble" onclick="secret(0)">💌</span>
+<span class="bubble" onclick="secret(1)">💌</span>
+<span class="bubble" onclick="secret(2)">💌</span>
+</div>
+
+<div class="note" id="secretNote"></div>
+
+<button class="next" onclick="go(6)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 6 -->
+<section class="page" id="p6">
+<div class="small-title">TUMHARE NAAM KUCH DUAAEIN</div>
+<h2>Kuch pyaari si wishes 🌠</h2>
+
+<p class="subtitle">Taaron ko chhoo kar apni wish dekho.</p>
+
+<div>
+<span class="bubble" onclick="wish(0)">⭐</span>
+<span class="bubble" onclick="wish(1)">🌟</span>
+<span class="bubble" onclick="wish(2)">✨</span>
+</div>
+
+<div class="note" id="wishNote"></div>
+
+<button class="next" onclick="go(7)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 7 -->
+<section class="page" id="p7">
+<div class="small-title">DIL SE LIKHA EK KHAT</div>
+<h2>Ek baat kehni thi... ♡</h2>
+
+<div class="card">
+<p class="letter">
+Pata hai, kabhi-kabhi zindagi mein kuch log
+bina kisi wajah ke bahut khaas ban jaate hain.
+
+<br><br>
+
+Na unhe khaas banne ki koshish karni padti hai,
+na hi unhe kuch alag karna padta hai.
+Bas unka apna hona hi kaafi hota hai.
+
+<br><br>
+
+Tumhare saath bhi kuch aisa hi hai.
+Tumhari chhoti-chhoti baatein,
+tumhara hasi-mazaak,
+tumhara apna alag sa andaaz...
+ye sab apne aap mein bahut khaas hai.
+
+<br><br>
+
+Shayad tumhe kabhi pata bhi na chale
+ki tumhari ek chhoti si smile
+kisi ka poora din achha kar sakti hai.
+Kabhi tumhari koi baat yaad aakar
+bina wajah chehre par muskaan la sakti hai.
+
+<br><br>
+
+Main chahti hoon ki tum apni zindagi mein
+bahut saari khoobsurat cheezein dekho.
+Tumhare saare sapne poore hon.
+Tumhe woh har khushi mile
+jiske liye tumne kabhi dil se dua maangi ho.
+
+<br><br>
+
+Jab kabhi kuch achha na lage,
+jab lage ki cheezein tumhare hisaab se nahi ho rahi,
+tab bhi khud par bharosa mat khona.
+Har din ek jaisa nahi hota,
+aur har mushkil ke baad ek nayi subah aati hai.
+
+<br><br>
+
+Hamesha apni hasi sambhal kar rakhna.
+Apne sapne bade rakhna.
+Aur kabhi khud ko kam mat samajhna.
+
+<br><br>
+
+Kuch log zindagi ki kitaab mein
+ek khoobsurat panne ki tarah hote hain.
+Unhe padhkar achha lagta hai,
+aur unki yaad bhi apne aap mein khaas hoti hai.
+
+<br><br>
+
+Bas tum bhi aise hi rehna...
+apne jaise, khush, befikr aur roshan.
+
+<br><br>
+
+Aur haan, ye chhoti si duniya
+sirf tumhare chehre par ek smile laane ke liye hai.
+
+<br><br>
+
+Tum sach mein bahut khaas ho. ♡
+</p>
+</div>
+
+<button class="next" onclick="go(8)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 8 -->
+<section class="page" id="p8">
+<div class="small-title">CHHOTI CHHOTI BAATEIN</div>
+<h2>Kuch vaade khud se 🌿</h2>
+
+<p class="subtitle">In baaton par tap karo.</p>
+
+<div style="max-width:400px">
+
+<div class="promise" onclick="this.classList.toggle('done');speak('Hamesha haste rehna!')">
+🌻 Hamesha haste rehna
+</div>
+
+<div class="promise" onclick="this.classList.toggle('done');speak('Apne sapne poore karna!')">
+🌙 Bade sapne dekhna
+</div>
+
+<div class="promise" onclick="this.classList.toggle('done');speak('Kabhi khud par bharosa mat khona!')">
+🦋 Khud par bharosa rakhna
+</div>
+
+<div class="promise" onclick="this.classList.toggle('done');speak('Hamesha chamakte rehna!')">
+✨ Hamesha chamakte rehna
+</div>
+
+</div>
+
+<div class="big-emoji">🌳</div>
+
+<button class="next" onclick="go(9)">AGLA PAGE →</button>
+</section>
+
+<!-- PAGE 9 -->
+<section class="page" id="p9">
+<div class="small-title">BAS EK AAKHRI BAAT</div>
+<h2>Ek wish maango 🌠</h2>
+
+<div class="moon">🌙</div>
+
+<p class="subtitle">
+Aankhein band karo, dil mein ek wish maango...
+aur phir neeche tap karo.
+</p>
+
+<button class="next" onclick="makeWish()">
+✨ MERI WISH ✨
+</button>
+
+<div class="note" id="wishFinal">
+Dil se dua hai ki tumhari har khoobsurat wish poori ho. ♡
+</div>
+
+<button class="next" onclick="go(10)">Aakhri page →</button>
+</section>
+
+<!-- PAGE 10 -->
+<section class="page" id="p10">
+<div class="small-title">EK CHHOTI SI JAADUI DUNIYA KA AAKHRI PANNA</div>
+<h2>Phir milenge... ♡</h2>
+
+<div class="big-emoji">🦋</div>
+
+<div class="card">
+<p class="letter" style="text-align:center">
+Umeed hai ye chhoti si duniya
+tumhare chehre par muskaan laayi hogi.
+
+<br><br>
+
+Apna khayal rakhna,
+khush rehna aur hamesha chamakte rehna.
+
+<br><br>
+
+Kuch achhi yaadein aur dher saari duaaon ke saath...
+</p>
+</div>
+
+<p style="margin-top:20px;font-size:13px;color:#987b4d">
+✧ APNA SIGNATURE BANAO ✧
+</p>
+
+<div class="signature-box">
+<canvas id="signature"></canvas>
+
+<button class="clear" onclick="clearSignature()">
+SIGNATURE MITAO
+</button>
+</div>
+
+<p style="font-family:'Cormorant Garamond';font-size:24px">
+— Shivangi ♡
+</p>
+
+<button class="next" onclick="celebrate()">
+JAADU BHEJO ✨
+</button>
+
+<p id="finalMessage" style="margin-top:15px;color:#987b4d"></p>
+</section>
+
+<script>
+
+/* VOICE */
+
+function speak(text){
+
+if(!("speechSynthesis" in window)) return;
+
+window.speechSynthesis.cancel();
+
+const msg = new SpeechSynthesisUtterance(text);
+
+msg.lang = "hi-IN";
+msg.rate = 0.88;
+msg.pitch = 1.08;
+msg.volume = 1;
+
+const voices = window.speechSynthesis.getVoices();
+
+const hindiVoice = voices.find(v =>
+v.lang.toLowerCase().startsWith("hi")
+);
+
+if(hindiVoice){
+msg.voice = hindiVoice;
+}
+
+window.speechSynthesis.speak(msg);
+}
+
+/* STARS */
+
+const stars = document.getElementById("stars");
+
+for(let i=0;i<45;i++){
+
+let s = document.createElement("span");
+
+s.className = "star";
+s.innerHTML = Math.random()>.5 ? "✦" : "✧";
+
+s.style.left = Math.random()*100+"%";
+s.style.top = Math.random()*100+"%";
+s.style.fontSize = (8+Math.random()*12)+"px";
+s.style.animationDelay = Math.random()*3+"s";
+
+stars.appendChild(s);
+
+}
+
+/* PAGE NAVIGATION */
+
+let current = 1;
+
+function go(n){
+
+if(n<1 || n>10) return;
+
+document.getElementById("p"+current).classList.remove("active");
+
+current = n;
+
+document.getElementById("p"+current).classList.add("active");
+
+document.getElementById("pageNumber").innerText =
+String(n).padStart(2,"0")+" / 10";
+
+document.getElementById("progress").style.width =
+(n*10)+"%";
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+speak("Ab agla panna dekho.");
+
+if(n===10){
+setTimeout(setupSignature,150);
+}
+
+}
+
+/* DOOR */
+
+function openDoor(){
+
+speak("Chalo, tumhari jaadui duniya mein swagat hai.");
+
+document.getElementById("door").classList.add("open");
+
+setTimeout(()=>go(2),700);
+
+}
+
+/* MOMENTS */
+
+const moments = [
+
+"Kuch pal chhote hote hain, par dil mein hamesha reh jaate hain.",
+
+"Tumhari zindagi hamesha dhoop ki tarah roshan rahe.",
+
+"Apne jaise hi rehna, kyunki tum waise hi bahut khaas ho.",
+
+"Tumhari wajah se aam se pal bhi khoobsurat ban jaate hain."
+
+];
+
+function showNote(i){
+
+let box = document.getElementById("momentNote");
+
+box.innerText = moments[i];
+
+box.classList.add("show");
+
+speak(moments[i]);
+
+}
+
+/* GIFTS */
+
+const gifts = [
+
+["🍜","MAGGI BAN GAYI!","Ek plate garma-garam Maggi, extra masala aur dher saari baatein!"],
+
+["☕","CHAI KA WAQT!","Ek cup garam chai, sukoon bhari shaam aur tumhari pasand ki baatein!"],
+
+["🥤","THANDI THANDI DRINK!","Ek chilled drink, kyunki surprise ke saath refreshment bhi zaroori hai!"],
+
+["🍫","CHOCOLATE!","Thodi si mithaas, kyunki tumhari khushi ka celebration toh banta hai!"],
+
+["🍟","FRIES PARTY!","Crispy-crispy fries aur bina wajah wali dher saari masti!"],
+
+["🍕","PIZZA PARTY!","Pizza, hasi-mazaak aur ek khoobsurat si shaam!"]
+
+];
+
+function gift(i,button){
+
+const box = document.getElementById("giftReveal");
+
+document.querySelectorAll(".giftbox").forEach(b=>{
+b.classList.remove("opened");
+});
+
+button.classList.add("opened");
+
+box.innerHTML = `
+<div class="food">${gifts[i][0]}</div>
+<h2>${gifts[i][1]}</h2>
+<p>${gifts[i][2]}</p>
+`;
+
+box.classList.add("show");
+
+speak(gifts[i][1]+". "+gifts[i][2]);
+
+for(let j=0;j<10;j++){
+setTimeout(()=>createFloat("🎈"),j*100);
+}
+
+}
+
+/* SECRET NOTES */
+
+const secrets = [
+
+"Tumhe duniya ki saari khoobsurat khushiyan milein. Ye dil se dua hai. 💌",
+
+"Kabhi apni keemat doosron ki nazron se mat naapna. Tum apne aap mein khaas ho. 🌷",
+
+"Kuch log bina koshish ke yaad reh jaate hain. Tum unhi mein se ek ho. ♡"
+
+];
+
+function secret(i){
+
+let box = document.getElementById("secretNote");
+
+box.innerText = secrets[i];
+
+box.classList.add("show");
+
+speak(secrets[i]);
+
+}
+
+/* WISHES */
+
+const wishes = [
+
+"Tumhare saare sapne ek din sach hon. ⭐",
+
+"Tumhari zindagi mein khushiyon ki kabhi kami na ho. 🌟",
+
+"Tumhara har aane wala kal aaj se bhi zyada khoobsurat ho. ✨"
+
+];
+
+function wish(i){
+
+let box = document.getElementById("wishNote");
+
+box.innerText = wishes[i];
+
+box.classList.add("show");
+
+speak(wishes[i]);
+
+}
+
+/* MAKE A WISH */
+
+function makeWish(){
+
+const box = document.getElementById("wishFinal");
+
+box.classList.add("show");
+
+speak("Dil se dua hai ki tumhari har khoobsurat wish poori ho.");
+
+for(let i=0;i<15;i++){
+createFloat("✨");
+}
+
+}
+
+/* FLOATING MAGIC */
+
+function createFloat(symbol){
+
+let el = document.createElement("div");
+
+el.className = "floating";
+el.innerText = symbol;
+
+el.style.left = Math.random()*100+"vw";
+el.style.bottom = "0";
+el.style.fontSize = (15+Math.random()*20)+"px";
+
+document.body.appendChild(el);
+
+setTimeout(()=>el.remove(),5000);
+
+}
+
+/* SIGNATURE PAD */
+
+const canvas = document.getElementById("signature");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let signatureReady = false;
+
+function setupSignature(){
+
+const rect = canvas.getBoundingClientRect();
+
+if(rect.width===0) return;
+
+const dpr = window.devicePixelRatio || 1;
+
+const oldCanvas = document.createElement("canvas");
+oldCanvas.width = canvas.width;
+oldCanvas.height = canvas.height;
+
+if(signatureReady){
+oldCanvas.getContext("2d").drawImage(canvas,0,0);
+}
+
+canvas.width = Math.round(rect.width*dpr);
+canvas.height = Math.round(rect.height*dpr);
+
+ctx.setTransform(dpr,0,0,dpr,0,0);
+
+ctx.strokeStyle = "#315b43";
+ctx.lineWidth = 2.5;
+ctx.lineCap = "round";
+ctx.lineJoin = "round";
+
+if(signatureReady && oldCanvas.width>0){
+ctx.drawImage(
+oldCanvas,
+0,0,oldCanvas.width,oldCanvas.height,
+0,0,rect.width,rect.height
+);
+}
+
+signatureReady = true;
+
+}
+
+function getPosition(e){
+
+const rect = canvas.getBoundingClientRect();
+
+return {
+x:e.clientX-rect.left,
+y:e.clientY-rect.top
+};
+
+}
+
+canvas.addEventListener("pointerdown",function(e){
+
+e.preventDefault();
+
+if(!signatureReady) setupSignature();
+
+drawing = true;
+
+canvas.setPointerCapture(e.pointerId);
+
+const p = getPosition(e);
+
+ctx.beginPath();
+ctx.moveTo(p.x,p.y);
+
+});
+
+canvas.addEventListener("pointermove",function(e){
+
+if(!drawing) return;
+
+e.preventDefault();
+
+const p = getPosition(e);
+
+ctx.lineTo(p.x,p.y);
+ctx.stroke();
+
+});
+
+function stopDrawing(){
+drawing = false;
+}
+
+canvas.addEventListener("pointerup",stopDrawing);
+canvas.addEventListener("pointercancel",stopDrawing);
+
+function clearSignature(){
+
+if(!signatureReady) setupSignature();
+
+const rect = canvas.getBoundingClientRect();
+
+ctx.clearRect(0,0,rect.width,rect.height);
+
+speak("Signature mita diya gaya hai.");
+
+}
+
+/* FINAL CELEBRATION */
+
+function celebrate(){
+
+speak("Tumhari duniya hamesha jaadu se bhari rahe. Khush rehna!");
+
+for(let i=0;i<35;i++){
+
+setTimeout(
+()=>createFloat(["✨","🦋","🌷","💚","⭐"][i%5]),
+i*80
+);
+
+}
+
+document.getElementById("finalMessage").innerText =
+"Tumhari duniya hamesha khoobsurat rahe. ♡";
+
+}
+
+/* INITIALIZE */
+
+window.addEventListener("resize",function(){
+
+if(current===10 && signatureReady){
+setupSignature();
+}
+
+});
+
+</script>
+
+</body>
+</html>
